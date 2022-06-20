@@ -83,7 +83,34 @@ struct Persona {
     func imprimirNombreCompleto(persona :Persona){
         var nombre = persona.nombre.lowercased()
         var apellidoPaterno = persona.apelidoPaterno.lowercased()
-        let apellidoMaterno = persona.apellidoMaterno[String.Index.init(encodedOffset: 0)]
+        let apellidoMaterno = persona.apellidoMaterno[apellidoMaterno.startIndex]
+        var primerNombre = nombre.split(separator: " ")[0]
+        var primerNombreMayuscula :String = ""
+        var apellidoPaternoMayuscula :String = ""
+        for (index,caracter) in primerNombre.enumerated(){
+            if (index == 0){
+                let caracterMayuscual = caracter.uppercased()
+                primerNombreMayuscula.append(caracterMayuscual)
+            }else {
+                primerNombreMayuscula.append(caracter)
+            }
+            
+        }
+        
+        for (index,caracter) in apellidoPaterno.enumerated(){
+            if(index == 0){
+                let caracterMayuscual = caracter.uppercased()
+                apellidoPaternoMayuscula.append(caracterMayuscual)
+            }else{
+                apellidoPaternoMayuscula.append(caracter)
+            }
+            
+        }
+        print("\(primerNombreMayuscula) \(apellidoPaternoMayuscula) \(apellidoMaterno).")
     }
 }
+let formato = DateFormatter()
+formato.dateFormat = "dd/mm/yyyy"
+var nuevaPersona = Persona(nombre: "CARLOS JOSÉ", apelidoPaterno: "ROBLES", fechaNacimiento: formato.date(from: "06/08/1995")!  , documento: "78451245", sexo: "M", correo: "carlos.roblesg@hotmail.com", cantidadHermanos: 2, apellidoMaterno: "GOMES")
+nuevaPersona.imprimirNombreCompleto(persona: nuevaPersona)
 
